@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notice Details</title>
+    <style>
+      /* Reset some default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Import the Montserrat font */
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(to right, #3f7ad3, #5a9bea);
+        color: #fff;
+        margin: 0;
+        padding: 20px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        text-align: left;
+      }
+
+      #collegeText {
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        margin-left: 10px;
+      }
+
+      img {
+        width: 100px;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .navbar a,
+      .nav-link {
+        text-decoration: none;
+        color: white;
+        margin: 0 10px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      h2,
+      h3 {
+        color: #fff;
+        margin-top: 20px;
+      }
+
+      p {
+        margin: 5px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        color: #333;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background-color: #fff;
+        color: #3f7ad3;
+      }
+
+      tr:nth-child(even) {
+        background-color: #fff;
+        color: #3f7ad3;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+      }
+
+      /* Hover effects */
+      a:hover,
+      .navbar a:hover,
+      .erp-button:hover,
+      .logout-button:hover,
+      .upload-button:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img
+          src="https://c.animaapp.com/oixjahaG/img/nexus-removebg-preview-1@2x.png"
+          alt="Company Logo"
+          width="100"
+        />
+        <span id="collegeText">COLLEGE NEXUS</span>
+      </div>
+
+      <div class="navbar">
+        <a href="#">DASHBOARD</a>
+      </div>
+      <div>
+        <a class="nav-link erp-button" href="https://erp.mgmu.ac.in/login.htm"
+          >ERP</a
+        >
+        <a class="nav-link logout-button" href="{% url 'student_login' %}"
+          >LOGOUT</a
+        >
+      </div>
+    </header>
+
+    <h2>{{ notice.title }}</h2>
+    <p>Type: {{ notice.notice_type }}</p>
+    <p>Date: {{ notice.notice_date }}</p>
+    <p>Uploaded By: {{ notice.uploaded_by.username }}</p>
+    <p>Description: {{ notice.content }}</p>
+
+    <h3>Applicants:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>PRN</th>
+          <th>Application Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in applicants %}
+        <tr>
+          <td>{{ Application.S_prn }}</td>
+          <td>{{ Application.notice_id }}</td>
+          <td>
+            <select name="application_status">
+              <option value="Applied">Applied</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

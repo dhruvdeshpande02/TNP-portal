@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coordinator List</title>
+    <style>
+      /* Reset some default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Import the Montserrat font */
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+      /* Global styles */
+      body {
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #3f7ad3, #5a9bea);
+        color: #333;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        text-align: left;
+      }
+
+      #collegeText {
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+      }
+
+      img {
+        width: 100px;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center-align the navigation bar */
+      }
+
+      .navbar a,
+      .nav-link {
+        text-decoration: none;
+        color: white;
+        margin: 0 10px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .navbar a:hover,
+      .nav-link:hover {
+        /* Style for hover state of links */
+        text-decoration: underline;
+      }
+
+      table {
+        width: 100%;
+        max-width: 800px;
+        border-collapse: collapse;
+        background-color: #e6f0ff;
+        border-radius: 10px;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+        margin: 0 auto; /* Center-align the table */
+      }
+
+      table thead {
+        background-color: #3f7ad3;
+        color: white;
+        font-weight: bold;
+      }
+
+      table th,
+      table td {
+        padding: 10px;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #e6e6e6;
+      }
+
+      table tr:hover {
+        background-color: #cfcfcf;
+      }
+
+      a {
+        text-decoration: none;
+        color: #3f7ad3;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img
+          src="https://c.animaapp.com/oixjahaG/img/nexus-removebg-preview-1@2x.png"
+          alt="Company Logo"
+          width="100"
+        />
+        <span id="collegeText">COLLEGE NEXUS</span>
+      </div>
+
+      <div class="navbar">
+        <a href="{%url 'tnp_home'%}">DASHBOARD</a>
+        <a href="{%url 'studentlist'%}">DATABASE</a>
+      </div>
+      <div>
+        <a class="nav-link erp-button" href="https://erp.mgmu.ac.in/login.htm"
+          >ERP</a
+        >
+        <a class="nav-link logout-button" href="{% url 'tnp_login'%}">LOGOUT</a>
+      </div>
+    </header>
+
+    <h2 style="text-align: center">
+      <!-- Center-align the title -->
+      Coordinator List
+    </h2>
+
+    <table
+      style="
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border-collapse: collapse;
+      "
+    >
+      <thead>
+        <tr style="background-color: #3f7ad3; color: #fff; font-weight: bold">
+          <th style="padding: 10px">ID</th>
+          <th style="padding: 10px">Department</th>
+          <th style="padding: 10px">Name</th>
+          <th style="padding: 10px">Phone number</th>
+          <th style="padding: 10px">Email</th>
+          <th style="padding: 10px">Personal email</th>
+          <th style="padding: 10px">Institute</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for coordinator in coordinators %}
+        <tr>
+          <td style="padding: 10px">{{ coordinator.F_ID }}</td>
+          <td style="padding: 10px">{{ coordinator.F_DEPARTMENT }}</td>
+          <td style="padding: 10px">{{ coordinator.F_NAME }}</td>
+          <td style="padding: 10px">{{ coordinator.F_PHONE_NO }}</td>
+          <td style="padding: 10px">{{ coordinator.F_EMAIL }}</td>
+          <td style="padding: 10px">{{ coordinator.F_Personal_Email }}</td>
+          <td style="padding: 10px">{{ coordinator.F_INSTITUTE }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

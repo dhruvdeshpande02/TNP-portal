@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notice List</title>
+    <style>
+      /* Reset some default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Import the Montserrat font */
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+      /* Global styles */
+      body {
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #3375d8, #85aae1);
+        color: #333;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        text-align: left;
+      }
+
+      #collegeText {
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+      }
+
+      img {
+        width: 100px;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center-align the navigation bar */
+      }
+
+      .navbar a,
+      .nav-link {
+        text-decoration: none;
+        color: white;
+        margin: 0 10px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      table {
+        width: 100%;
+        max-width: 800px;
+        border-collapse: collapse;
+        background-color: #e6f0ff;
+        border-radius: 10px;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+        margin: 0 auto; /* Center-align the table */
+      }
+
+      table thead {
+        background-color: #3f7ad3;
+        color: white;
+        font-weight: bold;
+      }
+
+      table th,
+      table td {
+        padding: 10px;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #e6e6e6;
+      }
+
+      table tr:hover {
+        background-color: #cfcfcf;
+      }
+
+      a {
+        text-decoration: none;
+        color: #3f7ad3;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .erp-button,
+      .logout-button,
+      .upload-button {
+        /* Style for the UPLOAD NOTICE button */
+        padding: 10px 20px;
+        background-color: #3f7ad3;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      .erp-button:hover,
+      .logout-button:hover,
+      .upload-button:hover {
+        background-color: #3066a9;
+      }
+
+      /* Spacing and alignment for navigation links */
+      .logo-container,
+      #collegeText {
+        text-align: left;
+      }
+
+      .navbar {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .erp-button,
+      .logout-button {
+        text-align: right;
+      }
+
+      .nav-link {
+        display: inline-block;
+        margin-left: 20px;
+      }
+
+      .nav-link.active {
+        text-decoration: underline;
+      }
+
+      /* Center-align the title */
+      h2 {
+        font-size: 2.5rem; /* Set the font size to make it larger */
+        margin-top: 1rem;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px; /* Add padding around the title */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img
+          src="https://c.animaapp.com/oixjahaG/img/nexus-removebg-preview-1@2x.png"
+          alt="Company Logo"
+          width="100"
+        />
+        <span id="collegeText">COLLEGE NEXUS</span>
+      </div>
+
+      <div class="navbar">
+        <a href="#">DASHBOARD</a>
+      </div>
+      <div>
+        <a class="nav-link erp-button" href="https://erp.mgmu.ac.in/login.htm"
+          >ERP</a
+        >
+        <a class="nav-link logout-button" href="{% url 'student_login' %}"
+          >LOGOUT</a
+        >
+      </div>
+    </header>
+
+    <h2>Notice List</h2>
+
+    <table
+      style="
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border-collapse: collapse;
+      "
+    >
+      <thead>
+        <tr style="background-color: #3f7ad3; color: #fff; font-weight: bold">
+          <th style="padding: 10px">ID</th>
+          <th style="padding: 10px">Type</th>
+          <th style="padding: 10px">Title</th>
+          <th style="padding: 10px">Date</th>
+          <th style="padding: 10px">Uploaded By</th>
+          <th style="padding: 10px">PDF File</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for notice in notices %}
+        <tr>
+          <td style="padding: 10px">{{ notice.id }}</td>
+          <td style="padding: 10px">{{ notice.notice_type }}</td>
+          <td style="padding: 10px">{{ notice.title }}</td>
+          <td style="padding: 10px">{{ notice.notice_date }}</td>
+          <td style="padding: 10px">{{ notice.uploaded_by.username }}</td>
+          <td style="padding: 10px">
+            <a
+              href="{{ notice.file.url }}"
+              target="_blank"
+              style="text-decoration: none; color: #3f7ad3; font-weight: bold"
+              >View PDF</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
